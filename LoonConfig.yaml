@@ -67,7 +67,7 @@ dl.l.google.com = server:119.29.29.29
 [Proxy]
 
 [Remote Proxy]
-卡车极速 = https://kcssr.me/auth/register?code=jUqG
+卡车极速 = http://192.168.5.254:7000/subscribe/v1/c3f5a041-4666-47aa-88d7-bd7e31de17f2
 
 [Proxy Group]
 ALL-SUB = url-test,韩国,日本,香港,台湾,美国,新加坡,其他地区,url = http://www.gstatic.com/generate_204,interval = 60,tolerance = 1500,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/SWCloud.png
