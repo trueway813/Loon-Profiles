@@ -1,122 +1,102 @@
-# LOON CONFIG
-# AUTHOR: LIJMXY
-# DATE: 2023.01.26
+# Lane | Local profile template
+# Last updated: 2026-09-13 01:52:35 (Asia/Shanghai)
+# Lane 不提供节点；导入启用前，将你的订阅地址替换为本客户端支持的完整订阅链接。
+# 建议复制/保存为本地配置，不跟随远程整份更新；节点与远程规则仍独立更新。
+# 换用新版完整配置前，请备份并重新填入订阅地址及个人修改。
+# Brokerage：富途/Moomoo 保留域名与 IP 覆盖；老虎、长桥仅保留实测关键域名；嘉信规则并入本组。
+# Crypto：仅 Binance、OKX、Bybit、Bitget；当前网络可正常访问时，可手动选择 DIRECT。
+# 上述两组默认均为 Proxy；分流只控制网络路径，不保证入金或交易结果。
+# AppleCN：命中苹果大陆服务名单时优先 DIRECT，其他 Apple 服务仍走 Apple 策略组。
+# Google 不再有大陆直连例外名单，全部域名统一走 Google 策略组。
+# LAN：私有网段与本地域名直连，位于全部规则之前，带 no-resolve。
+# China：已知中国域名先直连；General Proxy 随后保护已知境外域名，避免被后续 IP 判断误导。
+# General Proxy 策略同为 Final，不是另一个出口；它仍位于业务 IP / CN IP / GEOIP 之前。
+# CN IP：gaoyifan IPv4+IPv6 五次三次共识窗直连兜底，位于精细规则之后、GEOIP / Final 之前。
 
 [General]
-# > Google，Cloudflare，腾讯，阿里云 DoH
-doh-server = https://dns.google/dns-query,https://1.1.1.1/dns-query,https://doh.pub/dns-query,https://dns.alidns.com/dns-query
-
-# > IPv6 支持（默认关闭）
-ipv6 = false
-
-# > 跳过代理
-skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,e.crashlynatics.com,*.cmpassport.com,*.jegotrip.com.cn,*.icitymobile.mobi,id6.me,*.pingan.com.cn,*.cmbchina.com
-
-# > 旁路隧道
-bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
-
-# > dns服务器
-dns-server = system,223.5.5.5,223.6.6.6,119.29.29.29
-
-# > wifi 访问
+ip-mode = ipv4-only
+udp-fallback-mode = REJECT
 allow-wifi-access = false
-
-# > wifi 访问（http 端口）
-wifi-access-http-port = 7222
-
-# > wifi 访问（socket5 端口）
-wifi-access-socks5-port = 7221
-
-# > 代理测试网址
-proxy-test-url = http://www.gstatic.com/generate_204
-
-# > 测试超时
-test-timeout = 2
-
-# > 接口模式
-interface-mode = auto
-
-# > 节点连续失败 3 后进行节点切换
-switch-node-after-failure-times = 3
-
-# > 资源解析器
-# resource-parser = https://raw.githubusercontent.com/Peng-YM/Sub-Store/master/backend/dist/sub-store-parser.loon.min.js
-
-[Host]
-*.taobao.com = server:223.5.5.5
-*.tmall.com = server:223.5.5.5
-*.jd.com = server:119.28.28.28
-*.qq.com = server:119.28.28.28
-*.tencent.com = server:119.28.28.28
-*.alicdn.com = server:223.5.5.5
-*.aliyun.com = server:223.5.5.5
-*.weixin.com = server:119.28.28.28
-*.163.com = server:119.29.29.29
-*.126.com = server:119.29.29.29
-*.126.net = server:119.29.29.29
-*.127.net = server:119.29.29.29
-*.netease.com = server:119.29.29.29
-*.mi.com = server:119.29.29.29
-*.xiaomi.com = server:119.29.29.29
-*.bilibili.com = server:119.29.29.29
-*testflight.apple.com = server:8.8.4.4
-mtalk.google.com = 108.177.125.188
-dl.google.com = server:119.29.29.29
-dl.l.google.com = server:119.29.29.29
+bypass-tun = 224.0.0.0/4, 239.255.255.250/32, ff02::fb/128
+real-ip = *.stun.*.*, *.stun.*.*.*, *.stun.*.*.*.*, *.stun.*.*.*.*.*, *.n.n.srv.nintendo.net, *.stun.playstation.net, xbox.*.*.microsoft.com, *.*.xboxlive.com, *.msftncsi.com, *.msftconnecttest.com, *.lan, *.local
+hijack-dns = 8.8.8.8:53, 8.8.4.4:53
+proxy-test-url = http://cp.cloudflare.com/generate_204
+test-timeout = 5
 
 [Proxy]
 
+# 在下面填写 Loon 格式节点订阅；也可通过应用内节点页面添加。
+# 如重新导入远程配置，请选择保留节点/订阅，勿使用全部覆盖。
+# 节点与规则的定时更新请在应用的资源更新设置中开启。
 [Remote Proxy]
-卡车极速 = http://192.168.5.254:7000/subscribe/v1/c3f5a041-4666-47aa-88d7-bd7e31de17f2
+# 第一份默认启用；多订阅取消第二行注释并填写，更多订阅复制该行、别名递增。
+Subscription1 = http://192.168.5.254:7000/subscribe/v1/c3f5a041-4666-47aa-88d7-bd7e31de17f2
+# Subscription2 = 你的订阅地址
 
-[Proxy Group]
-ALL-SUB = url-test,韩国,日本,香港,台湾,美国,新加坡,其他地区,url = http://www.gstatic.com/generate_204,interval = 60,tolerance = 1500,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/SWCloud.png
-香港 = url-test,HK_Filter,url = http://www.gstatic.com/generate_204,interval = 600,tolerance = 1000,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/HK.png
-台湾 = url-test,TW_Filter,url = http://www.gstatic.com/generate_204,interval = 600,tolerance = 1500,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/TW.png
-美国 = url-test,US_Filter,url = http://www.gstatic.com/generate_204,interval = 300,tolerance = 1000,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/US.png
-韩国 = url-test,KR_Filter,url = http://www.gstatic.com/generate_204,interval = 600,tolerance = 1500,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/KR.png
-日本 = url-test,JP_Filter,url = http://www.gstatic.com/generate_204,interval = 300,tolerance = 1000,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/JP.png
-新加坡 = url-test,SG_Filter,url = http://www.gstatic.com/generate_204,interval = 600,tolerance = 2000,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/SG.png
-其他地区 = url-test,IN_Filter,BZ_Filter,TU_Filter,RS_Filter,url = http://www.gstatic.com/generate_204,interval = 1800,tolerance = 3000,img-url = https://raw.githubusercontent.com/alpha87/Loon-icon/master/Color/UN.png
-
+# Node and region filters.
 [Remote Filter]
-HK_Filter = NameRegex, FilterKey = "(?i)(港|HK|Hong)"
-TW_Filter = NameRegex, FilterKey = "(?i)(台|TW|Tai)"
-JP_Filter = NameRegex, FilterKey = "(?i)(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan)"
-KR_Filter = NameRegex, FilterKey = "(?i)(KR|Korea|KOR|首尔|韩|韓)"
-US_Filter = NameRegex, FilterKey = "(?i)(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)"
-SG_Filter = NameRegex, FilterKey = "(?i)(新加坡|坡|狮城|SG|Singapore)"
-TU_Filter = NameKeyword, FilterKey = "土耳其"
-BZ_Filter = NameKeyword, FilterKey = "巴西"
-IN_Filter = NameKeyword, FilterKey = "印度"
-RS_Filter = NameKeyword, FilterKey = "俄罗斯"
+我的节点 = NameRegex, FilterKey = ".+"
+US Nodes = NameRegex, FilterKey = "(?i)^.*(?:(?:🇺🇸|美国|United\s*States|(?:^|[^A-Za-z])(?:US|USA)(?:[0-9]+)?(?:$|[^A-Za-z]))).*$"
+JP Nodes = NameRegex, FilterKey = "(?i)^.*(?:(?:🇯🇵|日本|Japan|(?:^|[^A-Za-z])JP(?:[0-9]+)?(?:$|[^A-Za-z]))).*$"
+HK Nodes = NameRegex, FilterKey = "(?i)^.*(?:(?:🇭🇰|香港|Hong\s*Kong|(?:^|[^A-Za-z])HK(?:[0-9]+)?(?:$|[^A-Za-z]))).*$"
+TW Nodes = NameRegex, FilterKey = "(?i)^.*(?:(?:🇹🇼|台湾|臺灣|Taiwan|(?:^|[^A-Za-z])TW(?:[0-9]+)?(?:$|[^A-Za-z]))).*$"
+SG Nodes = NameRegex, FilterKey = "(?i)^.*(?:(?:🇸🇬|新加坡|狮|獅|Singapore|(?:^|[^A-Za-z])SG(?:[0-9]+)?(?:$|[^A-Za-z]))).*$"
 
-[Rule]
-GEOIP,cn,DIRECT
-FINAL,ALL-SUB
+# Base, service, and region strategy groups.
+[Proxy Group]
+Proxy = select,US Auto,JP Auto,HK Auto,TW Auto,SG Auto,我的节点,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Proxy.png
+AI = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/AI.png
+Brokerage = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Magic.png
+Crypto = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Cryptocurrency_3.png
+YouTube = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/YouTube.png
+TikTok = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/TikTok.png
+Emby = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Emby.png
+Streaming = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Netflix.png
+Gaming = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Steam.png
+Telegram = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Telegram.png
+Social = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/X.png
+Developer = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/GitHub.png
+Google = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Google_Search.png
+Microsoft = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Microsoft.png
+Apple = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Apple_1.png
+Final = select,Proxy,DIRECT,US Auto,US Manual,JP Auto,JP Manual,HK Auto,HK Manual,TW Auto,TW Manual,SG Auto,SG Manual,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Global.png
+US Auto = url-test,US Nodes,url = http://cp.cloudflare.com/generate_204,interval = 600,tolerance = 50,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/United_States.png
+US Manual = select,US Nodes,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/United_States.png
+JP Auto = url-test,JP Nodes,url = http://cp.cloudflare.com/generate_204,interval = 600,tolerance = 50,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Japan.png
+JP Manual = select,JP Nodes,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Japan.png
+HK Auto = url-test,HK Nodes,url = http://cp.cloudflare.com/generate_204,interval = 600,tolerance = 50,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Hong_Kong.png
+HK Manual = select,HK Nodes,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Hong_Kong.png
+TW Auto = url-test,TW Nodes,url = http://cp.cloudflare.com/generate_204,interval = 600,tolerance = 50,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/China.png
+TW Manual = select,TW Nodes,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/China.png
+SG Auto = url-test,SG Nodes,url = http://cp.cloudflare.com/generate_204,interval = 600,tolerance = 50,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Singapore.png
+SG Manual = select,SG Nodes,img-url = https://raw.githubusercontent.com/wenjinliuu/Lane/main/assets/icons/third-party/qure/Singapore.png
 
+# Ordered remote routing rules.
 [Remote Rule]
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy.list, policy=ALL-SUB, tag=Global, parser-enable=true, enabled=true
-https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Bilibili.list, policy=DIRECT, tag=哔哩哔哩, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/XiaoHongShu/XiaoHongShu.list, policy=DIRECT, tag=小红书, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Weibo/Weibo.list, policy=DIRECT, tag=微博, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Zhihu/Zhihu.list, policy=DIRECT, tag=知乎, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/WeChat/WeChat.list, policy=DIRECT, tag=微信, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ZhihuAds/ZhihuAds.list, policy=REJECT-DROP, tag=知乎去广告, enabled=true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/lan.lsr, policy = DIRECT, tag = LAN, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/apple-cn.lsr, policy = DIRECT, tag = AppleCN, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/ai.lsr, policy = AI, tag = AI, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/schwab.lsr, policy = Brokerage, tag = Schwab, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/brokerage.lsr, policy = Brokerage, tag = Brokerage, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/crypto.lsr, policy = Crypto, tag = Crypto, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/youtube.lsr, policy = YouTube, tag = YouTube, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/tiktok.lsr, policy = TikTok, tag = TikTok, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/emby.lsr, policy = Emby, tag = Emby, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/streaming.lsr, policy = Streaming, tag = Streaming, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/gaming.lsr, policy = Gaming, tag = Gaming, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/telegram.lsr, policy = Telegram, tag = Telegram, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/social.lsr, policy = Social, tag = Social, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/developer.lsr, policy = Developer, tag = Developer, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/google.lsr, policy = Google, tag = Google, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/microsoft.lsr, policy = Microsoft, tag = Microsoft, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/apple.lsr, policy = Apple, tag = Apple, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/brokerage-ip.lsr, policy = Brokerage, tag = Brokerage IP, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/china.lsr, policy = DIRECT, tag = China, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/proxy.lsr, policy = Final, tag = General Proxy, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/telegram-ip.lsr, policy = Telegram, tag = Telegram IP, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/cn-ip.lsr, policy = DIRECT, tag = CN IP, enabled = true
+https://raw.githubusercontent.com/wenjinliuu/Lane/main/dist/loon/rules/cn-region.lsr, policy = DIRECT, tag = CN Region, enabled = true
 
-[Rewrite]
-
-[Script]
-http-response ^https?:\/\/biz\.caiyunapp\.com\/(membership_rights|v2\/user) script-path=weathervip.js, requires-body=true, timeout=10, tag=彩云天气VIP
-http-response ^https?:\/\/backend\.getdrafts\.com\/api\/v1\/verification\/verify_receipt script-path=drafts.js, requires-body=true, timeout=10, tag=DraftsVIP
-
-[Plugin]
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/Redirect/Redirect.plugin, policy=ALL-SUB, tag=重定向, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/Advertising/Advertising.plugin, policy=REJECT, tag=Advertising, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/AdvertisingScript/AdvertisingScript.plugin, policy=REJECT, tag=AdvertisingScript, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/AllInOne/AllInOne.plugin, policy=REJECT, tag=ALL IN ONE, enabled=true
-https://raw.githubusercontent.com/zqzess/rule_for_quantumultX/master/Loon/Plugin/bilibili.plugin, policy=DIRECT, tag=哔哩哔哩, enabled=true
-https://raw.githubusercontent.com/zqzess/rule_for_quantumultX/master/Loon/Plugin/YouTubeAd.plugin, policy=REJECT, tag=YouTubeADs, enabled=true
-
-[Mitm]
-hostname = backend.getdrafts.com,biz.caiyunapp.com
+# Local fallback rule. GEOIP,CN is the final remote rule above.
+[Rule]
+FINAL,Final
